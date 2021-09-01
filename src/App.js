@@ -39,6 +39,8 @@ const emojiDictionary = {
   "🐒": " Monkey "
 };
 
+var emojiWeKnow = Object.keys(emojiDictionary);
+
 export default function App() {
   const [meaning, setMeaning] = useState("");
 
@@ -54,12 +56,30 @@ export default function App() {
     }
   }
 
+  function emojiClickHandler(emoji) {
+    // console.log(emoji);
+    var meaning = emojiDictionary[emoji];
+    setMeaning(meaning);
+  }
+
   return (
     <div className="App">
       <h1>Inside Outt...</h1>
       <input onChange={emojiInputHandler}></input>
 
       <div>{meaning}</div>
+
+      <h3> Emoji We Have</h3>
+      {emojiWeKnow.map(function (emoji) {
+        return (
+          <span
+            onClick={() => emojiClickHandler(emoji)}
+            style={{ fontSize: "2rem", padding: "1rem", cursor: "pointer" }}
+          >
+            {emoji}
+          </span>
+        );
+      })}
     </div>
   );
 }
